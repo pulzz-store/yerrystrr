@@ -1,0 +1,576 @@
+/* =========================================================
+   YERRY STRR — Halaman Pembayaran (Tema Hijau)
+   ========================================================= */
+
+:root {
+  --ink:        #040f0a;
+  --bg-card:    rgba(6, 24, 16, 0.65);
+  --text:       #f0fdf4;
+  --muted:      #a7f3d0;
+  --border:     rgba(16, 185, 129, 0.25);
+  --accent:     #10b981; /* Hijau Emerald */
+  --accent-2:   #059669;
+  --accent-soft:#6ee7b7;
+  --radius:     8px;
+  --ease:       cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--ink);
+  color: var(--text);
+  font-family: 'Archivo', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* ---------- Background ---------- */
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image: url('bg.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.veil {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 50% 30%, rgba(16, 185, 129, 0.25), transparent 70%),
+    linear-gradient(180deg, rgba(4, 15, 10, 0.35) 0%, rgba(4, 15, 10, 0.65) 100%);
+}
+
+/* ---------- Shell ---------- */
+.shell {
+  position: relative;
+  z-index: 2;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+/* ---------- Kartu ---------- */
+.card {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  padding: 28px 22px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.55),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+}
+
+/* ---------- Brand ---------- */
+.brand { margin-bottom: 22px; }
+
+.brand__kicker {
+  margin: 0 0 6px;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: var(--accent-soft);
+}
+
+.brand__logo {
+  margin: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #ffffff;
+  line-height: 1.1;
+  text-shadow: 0 2px 18px rgba(16, 185, 129, 0.55);
+}
+
+.brand__rule {
+  display: block;
+  width: 36px;
+  height: 2px;
+  margin-top: 10px;
+  background: var(--accent);
+  border-radius: 1px;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.7);
+}
+
+/* ---------- PANGGUNG ---------- */
+.stage { display: block; }
+.panel { display: none; }
+
+.panel.is-active {
+  display: block;
+  animation: panelIn 0.24s var(--ease) both;
+}
+
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Teks umum ---------- */
+.lead {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.foot {
+  margin: 18px 0 0;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: rgba(167, 243, 208, 0.7);
+}
+
+.hint {
+  margin: 12px 0 0;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.hint--center { text-align: center; margin-top: 16px; }
+
+/* ---------- Tombol pilihan ---------- */
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.choice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 56px;
+  padding: 14px 16px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    border-color 0.18s var(--ease),
+    background 0.18s var(--ease),
+    transform 0.18s var(--ease),
+    box-shadow 0.18s var(--ease);
+}
+
+.choice:hover,
+.choice:focus-visible {
+  border-color: var(--accent);
+  background: rgba(16, 185, 129, 0.25);
+  box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.25),
+              0 8px 24px rgba(16, 185, 129, 0.25);
+  outline: none;
+}
+
+.choice:active { transform: scale(0.99); }
+
+.choice__title {
+  display: block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.choice__note {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.choice__arrow {
+  color: var(--accent);
+  font-size: 1.1rem;
+  transition: transform 0.18s var(--ease);
+}
+
+.choice:hover .choice__arrow { transform: translateX(4px); }
+
+/* ---------- Tombol kembali ---------- */
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 6px 0;
+  background: none;
+  border: none;
+  color: var(--accent-soft);
+  font-family: 'Archivo', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.back:hover,
+.back:focus-visible { color: var(--accent); outline: none; }
+
+.back--foot { margin-top: 20px; }
+
+/* ---------- Panel DANA ---------- */
+.dana {
+  margin: 16px 0 12px;
+  padding: 20px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.label {
+  margin: 0 0 6px;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent-soft);
+}
+
+.value {
+  margin: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  color: #ffffff;
+}
+
+.value--number {
+  font-size: 1.45rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  word-break: break-word;
+  text-shadow: 0 0 20px rgba(16, 185, 129, 0.35);
+}
+
+.value--name {
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: capitalize;
+}
+
+.divider {
+  display: block;
+  height: 1px;
+  margin: 18px 0;
+  background: var(--border);
+}
+
+.copy {
+  display: inline-block;
+  width: 100%;
+  min-height: 44px;
+  padding: 12px 16px;
+  background: transparent;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  color: var(--accent);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background 0.18s var(--ease),
+    color 0.18s var(--ease),
+    box-shadow 0.18s var(--ease);
+}
+
+.copy:hover,
+.copy:focus-visible {
+  background: var(--accent);
+  color: var(--ink);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.55);
+  outline: none;
+}
+
+/* ---------- Panel QR ---------- */
+.qrbox {
+  width: min(100%, 260px);
+  margin: 18px auto 12px;
+  padding: 14px;
+  background: #f7f3ec;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: var(--radius);
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.45),
+    0 0 30px rgba(16, 185, 129, 0.35);
+}
+
+.qrbox img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.qrlabel {
+  margin: 0 0 4px;
+  text-align: center;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+}
+
+/* ---------- Catatan ---------- */
+.note {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 12px 14px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--accent);
+  border-radius: 6px;
+}
+
+.note__icon {
+  flex-shrink: 0;
+  color: var(--accent);
+  line-height: 0;
+  margin-top: 2px;
+}
+
+.note__body {
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.note__body b { color: var(--text); font-weight: 600; }
+
+/* ---------- Footer kontak ---------- */
+.contact {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.contact__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: 1;
+  min-height: 40px;
+  padding: 8px 12px;
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: 'Archivo', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    border-color 0.18s var(--ease),
+    background 0.18s var(--ease),
+    box-shadow 0.18s var(--ease);
+}
+
+.contact__item:hover,
+.contact__item:focus-visible {
+  border-color: var(--accent);
+  background: rgba(16, 185, 129, 0.3);
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.35);
+  outline: none;
+}
+
+.contact__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.contact__text {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* =========================================================
+   KOTAK MUSIK
+   ========================================================= */
+.music {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+  padding: 12px 14px;
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  position: relative;
+  overflow: hidden;
+}
+
+.music__cover {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--accent-2), var(--accent));
+  border-radius: 6px;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.45);
+}
+
+.music__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.music__label {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent-soft);
+}
+
+.music__title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.music__btn {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  color: var(--accent);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background 0.18s var(--ease),
+    color 0.18s var(--ease),
+    box-shadow 0.18s var(--ease),
+    transform 0.18s var(--ease);
+}
+
+.music__btn:hover,
+.music__btn:focus-visible {
+  background: var(--accent);
+  color: var(--ink);
+  box-shadow: 0 0 18px rgba(16, 185, 129, 0.65);
+  outline: none;
+}
+
+.music__btn:active { transform: scale(0.94); }
+
+.music__icon {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.18s var(--ease);
+}
+
+.music__icon--play { opacity: 1; }
+
+.music.is-playing .music__icon--play  { opacity: 0; }
+.music.is-playing .music__icon--pause { opacity: 1; }
+
+/* Equalizer */
+.music__bars {
+  position: absolute;
+  right: 14px;
+  top: 12px;
+  display: none;
+  gap: 2px;
+  align-items: flex-end;
+  height: 10px;
+  pointer-events: none;
+}
+
+.music.is-playing .music__bars { display: inline-flex; }
+
+.music__bars i {
+  display: block;
+  width: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+  animation: eq 0.9s ease-in-out infinite;
+}
+
+.music__bars i:nth-child(1) { height: 100%; animation-delay: 0s; }
+.music__bars i:nth-child(2) { height: 60%;  animation-delay: 0.15s; }
+.music__bars i:nth-child(3) { height: 80%;  animation-delay: 0.3s; }
+
+@keyframes eq {
+  0%, 100% { transform: scaleY(0.4); }
+  50%      { transform: scaleY(1); }
+}
+
+/* ---------- Responsif desktop ---------- */
+@media (min-width: 640px) {
+  .shell {
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 40px 24px;
+  }
+
+  .card {
+    max-width: 440px;
+    margin-top: 6vh;
+    margin-left: 10%;
+    margin-right: auto;
+    padding: 36px 30px;
+  }
+
+  .brand__logo { font-size: 1.9rem; }
+  .value--number { font-size: 1.7rem; }
+}
+
+@media (min-width: 1024px) {
+  .card { margin-left: 16%; }
+}
