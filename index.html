@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#040f0a">
+<title>Pembayaran Resmi — YERRY STRR</title>
+<meta name="description" content="Halaman pembayaran resmi YERRY STRR. Tersedia QRIS dan DANA.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="bg" aria-hidden="true"></div>
+<div class="veil" aria-hidden="true"></div>
+
+<main class="shell">
+  <section class="card" aria-label="Halaman pembayaran YERRY STRR">
+
+    <!-- IDENTITAS -->
+    <header class="brand">
+      <p class="brand__kicker">Pembayaran Resmi</p>
+      <h1 class="brand__logo">YERRY STRR</h1>
+      <span class="brand__rule" aria-hidden="true"></span>
+    </header>
+
+    <!-- PANGGUNG PANEL -->
+    <div class="stage" id="stage">
+
+      <!-- 1. BERANDA -->
+      <section class="panel is-active" data-view="home" aria-label="Pilih metode pembayaran">
+        <p class="lead">Pilih metode pembayaran yang ingin digunakan.</p>
+
+        <div class="choices">
+          <button type="button" class="choice" data-goto="qris">
+            <span class="choice__text">
+              <span class="choice__title">QR</span>
+              <span class="choice__note">Tampilkan kode QRIS</span>
+            </span>
+            <span class="choice__arrow" aria-hidden="true">&#8594;</span>
+          </button>
+
+          <button type="button" class="choice" data-goto="dana">
+            <span class="choice__text">
+              <span class="choice__title">DANA</span>
+              <span class="choice__note">Nomor &amp; nama pemilik</span>
+            </span>
+            <span class="choice__arrow" aria-hidden="true">&#8594;</span>
+          </button>
+        </div>
+
+        <p class="foot">Periksa kembali nominal sebelum melakukan pembayaran.</p>
+
+        <!-- Kontak (IG dihapus, hanya WA) -->
+        <div class="contact">
+          <a class="contact__item" href="https://wa.me/6283155995976" target="_blank" rel="noopener">
+            <span class="contact__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.1c-.24.68-1.42 1.3-1.96 1.35-.5.05-1.13.07-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.8-4.17-4.94-4.36-.15-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.27-.29.58-.36.78-.36.19 0 .39 0 .56.01.18.01.42-.07.66.5.24.58.83 2.02.9 2.17.07.14.12.31.02.5-.09.19-.14.31-.27.48-.14.16-.29.36-.41.48-.14.14-.28.29-.12.56.16.27.72 1.18 1.54 1.92 1.06.94 1.95 1.24 2.22 1.38.27.14.43.12.59-.07.16-.19.68-.79.86-1.06.18-.27.36-.22.61-.13.25.09 1.6.75 1.87.89.27.14.45.2.52.31.07.11.07.65-.17 1.32z"/></svg>
+            </span>
+            <span class="contact__text">YERRY STRR</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 2. DANA -->
+      <section class="panel" data-view="dana" aria-label="Informasi pembayaran DANA">
+        <button type="button" class="back" data-goto="home">&#8592; Kembali</button>
+
+        <div class="dana">
+          <p class="label">Nomor DANA</p>
+          <p class="value value--number" id="danaNumber">0851-3591-5014</p>
+
+          <span class="divider" aria-hidden="true"></span>
+
+          <p class="label">Nama Pemilik</p>
+          <p class="value value--name" id="danaName">reviana nur haslinda</p>
+        </div>
+
+        <button type="button" class="copy" data-copy="#danaNumber">Salin nomor</button>
+
+        <p class="hint">Pastikan nama penerima sesuai sebelum mengirim dana.</p>
+
+        <div class="note">
+          <span class="note__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </span>
+          <div class="note__body">
+            Kirim dana hanya ke nomor di atas. <b>YERRY STRR tidak pernah meminta transfer ke rekening pribadi lain.</b>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. GAMBAR QR (Langsung tampil, tanpa pilihan 1/2) -->
+      <section class="panel" data-view="qris" aria-label="Kode QRIS YERRY STRR">
+        <button type="button" class="back" data-goto="home">&#8592; Kembali</button>
+
+        <div class="qrbox">
+          <img id="qrImage" src="qris1.jpg" alt="Kode QRIS YERRY STRR" width="600" height="600">
+        </div>
+
+        <p class="qrlabel" id="qrLabel">QRIS</p>
+        <p class="hint hint--center">Pindai kode di atas dengan aplikasi pembayaran atau m-banking yang mendukung QRIS.</p>
+
+        <div class="note">
+          <span class="note__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>
+          </span>
+          <div class="note__body">
+            Kode ini bisa kedaluwarsa. <b>Muat ulang halaman</b> jika gagal dipindai.
+          </div>
+        </div>
+
+        <button type="button" class="back back--foot" data-goto="home">&#8592; Kembali ke awal</button>
+      </section>
+
+    </div>
+
+    <!-- ================= KOTAK MUSIK ================= -->
+    <div class="music" id="musicBox">
+      <audio id="music" src="music.mp3" loop preload="none"></audio>
+
+      <div class="music__cover" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+          <path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/>
+        </svg>
+      </div>
+
+      <div class="music__info">
+        <span class="music__label" id="musicStatus">Musik dijeda</span>
+        <span class="music__title">Teh Hijau Tulus</span>
+      </div>
+
+      <button type="button" class="music__btn" id="musicBtn" aria-label="Putar musik" aria-pressed="false">
+        <svg class="music__icon music__icon--play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+        <svg class="music__icon music__icon--pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+          <rect x="6" y="5" width="4" height="14" rx="1"/>
+          <rect x="14" y="5" width="4" height="14" rx="1"/>
+        </svg>
+      </button>
+
+      <span class="music__bars" aria-hidden="true">
+        <i></i><i></i><i></i>
+      </span>
+    </div>
+
+  </section>
+</main>
+
+<noscript>
+  <style>
+    .panel{ display:block !important; opacity:1 !important; margin-bottom:24px; }
+  </style>
+</noscript>
+
+<script src="script.js"></script>
+</body>
+</html>
